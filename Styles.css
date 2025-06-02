@@ -1,0 +1,8 @@
+/* css for the about trie popover*/
+.popover{
+    max-width: 40vw;
+}
+
+#about-popover-img {
+    width: 100% !important;
+}
