@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="Styles.css">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
-    <script src="main.js"></script>
 
   </head>
   <nav class="custom-navbar navbar navbar-expand-sm">
@@ -33,8 +32,8 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</a>
           <div class="dropdown-menu" aria-labelledby="dropdownId">
-            <a class="dropdown-item" href="#">Add word to Trie</a>
-            <a class="dropdown-item" href="#">Search for word</a>
+            <a class="dropdown-item" onclick="switch_action('add')">Add word to Trie</a>
+            <a class="dropdown-item" onclick="switch_action('remove')">Search for word</a>
           </div>
         </li>
       </ul>
@@ -60,10 +59,32 @@
       <div class="canvas-wrapper">
         <canvas id="canvas"></canvas>
       </div>
+
+      <div class="user-input-wrapper">
+        <div class="word-bank hidden"></div>
+        <div class="add-field">
+          <form onsubmit="if(this.checkValidity()){add_to_Trie();} return false;">
+            <div class="form-row">
+              <div class="col-10">
+                <input id="add-input-field" class="form-control" pattern="\S+" maxlength="15" rows="4" placeholder="Add a single word to Trie..." required />
+              </div>
+              <div class="col-2">
+                <button type="submit" class="btn btn-primary">Add</button>
+              </div>
+              
+            </div>
+          </form>
+        </div>
+        <div class="search-field hidden">
+          <input id="search-input-field" class="form-control" pattern="\S+" maxlength="15" rows="4" placeholder="Search for a single word..." />
+        </div>
+      </div>
+
     </div>
 
   </body>
 
+  <script src="main.js"></script>
   <script>
 
     function toggle_light_mode() {
