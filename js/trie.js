@@ -28,7 +28,22 @@ class Trie {
 
     insert(word){
 
-        
+        let node = this.root;
+        const newNodes = [];
+
+        for (const char of word){
+            if (!node.children[char]){
+                const newNode = new TrieNode(char);
+                node.children[char] = newNode;
+                newNode.parent = node;
+                newNodes.push(newNode);
+            }
+            node = node.children[char];
+        }
+
+        node.isEndOfWord = true;
+
+        return newNodes;
 
     }
 
