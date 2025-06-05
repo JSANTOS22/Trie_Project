@@ -9,7 +9,9 @@ function assignPositions(root, canvasWidth, startY = 80, spacing = 80) {
 
   function dfs(node, depth) {
     allNodes.push(node);
-    const children = Object.values(node.children);
+    const children = Object.keys(node.children)
+        .sort() // alphabetically
+        .map(key => node.children[key]);
     if (children.length === 0) {
       node.x = x;
       node.y = startY + depth * spacing;
