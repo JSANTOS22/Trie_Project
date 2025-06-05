@@ -12,7 +12,7 @@ class TrieNode {
         this.isEndOfWord = false;
 
         // animation properties
-        this.state = 'new'; // can also be 'existing
+        this.state = 'new'; // can also be 'existing'
         this.parent = null;
         this.x = null;
         this.y = null;
@@ -23,7 +23,7 @@ class TrieNode {
 class Trie {
 
     constructor(){
-        this.root = TrieNode('');
+        this.root = new TrieNode('');
     }
 
     insert(word){
@@ -32,10 +32,12 @@ class Trie {
         const newNodes = [];
 
         for (const char of word){
+            // if child char doesn't exist yet, we must create a new node
             if (!node.children[char]){
                 const newNode = new TrieNode(char);
                 node.children[char] = newNode;
                 newNode.parent = node;
+                newNode.domState = 'new';
                 newNodes.push(newNode);
             }
             node = node.children[char];
@@ -44,6 +46,28 @@ class Trie {
         node.isEndOfWord = true;
 
         return newNodes;
+
+    }
+
+    search(word){
+
+        let node = this.root;
+        const path = [];
+
+        for (const char of word){
+
+            // if child card doesn't exist, word isn't in the Trie 
+            if (!node.children[char]){
+                return null;
+            }
+
+            node = node.children[char];
+            path.push(node);
+
+        }
+
+        //return node.isEndOfWord;
+        return path;
 
     }
 

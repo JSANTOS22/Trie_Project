@@ -83,12 +83,13 @@
     </div>
 
   </body>
-
-  <script src="js/main.js"></script>
-  <script src="js/canvas.js"></script>
+  
   <script src="js/trie.js"></script>
   <script src="js/layout.js"></script>
+  <script src="js/canvas.js"></script>
   <script src="js/animation.js"></script>
+  <script src="js/main.js"></script>
+  
   <script>
     function toggle_light_mode() {
         var app = document.getElementsByTagName("BODY")[0];
@@ -120,6 +121,29 @@
         html: true
       });
     });
+    
+    const wrapper = canvas.parentElement; 
+
+    function resizeCanvas() {
+      const rect = wrapper.getBoundingClientRect();
+      const scale = window.devicePixelRatio || 1;
+
+      // Set actual pixel size of canvas to wrapper size * scale
+      canvas.width = rect.width * scale;
+      canvas.height = rect.height * scale;
+
+      // Set CSS size explicitly (optional if your CSS already does it)
+      canvas.style.width = rect.width + 'px';
+      canvas.style.height = rect.height + 'px';
+
+      // Reset transform and scale for crisp drawing
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(scale, scale);
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
 
   </script>
 </html>
