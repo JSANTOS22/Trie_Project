@@ -20,8 +20,12 @@ add_button.addEventListener('click', (e) => {
 
 search_input.addEventListener('input', (e) => {
     e.target.value = e.target.value.replace(/[^a-zA-Z]/g, '').toUpperCase();
+    drawTrie(trie, []);
     
-    if (!e.target.value) return;
+    if (!e.target.value) {
+        animateSearch(new Set(), trie.root);
+        return;
+    }
 
     const path = trie.search(e.target.value);
     if (path) {
