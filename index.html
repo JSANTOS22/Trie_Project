@@ -61,15 +61,15 @@
       </div>
 
       <div class="user-input-wrapper">
-        <div class="word-bank hidden"></div>
+        <div class="word-bank"></div>
         <div class="add-field">
-          <form onsubmit="if(this.checkValidity()){add_to_Trie();} return false;">
+          <form onsubmit="if(!this.checkValidity()){add_to_Trie();} return false;">
             <div class="form-row">
               <div class="col-10">
                 <input id="add-input-field" class="form-control" pattern="\S+" maxlength="15" rows="4" placeholder="Add a single word to Trie..." required />
               </div>
               <div class="col-2">
-                <button type="submit" class="btn btn-primary">Add</button>
+                <button id="add-button" type="submit" class="btn btn-primary">Add</button>
               </div>
               
             </div>
@@ -116,34 +116,13 @@
     // when the document is ready
     $(document).ready(function() {
       
-      // Initialize popovers for all elements with 'data-toggle="tooltip"'
+      // initialize popovers for all elements with 'data-toggle="tooltip"'
       $('[data-toggle="popover"]').popover({
         html: true
       });
     });
-    
-    const wrapper = canvas.parentElement; 
-
-    function resizeCanvas() {
-      const rect = wrapper.getBoundingClientRect();
-      const scale = window.devicePixelRatio || 1;
-
-      // Set actual pixel size of canvas to wrapper size * scale
-      canvas.width = rect.width * scale;
-      canvas.height = rect.height * scale;
-
-      // Set CSS size explicitly (optional if your CSS already does it)
-      canvas.style.width = rect.width + 'px';
-      canvas.style.height = rect.height + 'px';
-
-      // Reset transform and scale for crisp drawing
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale(scale, scale);
-    }
 
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
 
   </script>
 </html>

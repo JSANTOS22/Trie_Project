@@ -29,7 +29,7 @@ class Trie {
     insert(word){
 
         let node = this.root;
-        const newNodes = [];
+        const nodePath = [node];
 
         for (const char of word){
             // if child char doesn't exist yet, we must create a new node
@@ -38,14 +38,14 @@ class Trie {
                 node.children[char] = newNode;
                 newNode.parent = node;
                 newNode.domState = 'new';
-                newNodes.push(newNode);
             }
             node = node.children[char];
+            nodePath.push(node);
         }
 
         node.isEndOfWord = true;
 
-        return newNodes;
+        return nodePath;
 
     }
 
