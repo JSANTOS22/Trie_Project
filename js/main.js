@@ -5,28 +5,27 @@ const search_input = document.getElementById('search-input-field');
 const wrapper = canvas.parentElement; 
 const trie = new Trie();
 var nodePath = [];
-var words = [];
 
 add_button.addEventListener('click', (e) => {
-    console.log('clicked');
     add_input.value = add_input.value.replace(/[^a-zA-Z]/g, '').toUpperCase();
 
     if (!add_input.value) return;
 
     nodePath = trie.insert(add_input.value);
     assignPositions(trie.root, canvas.clientWidth);
-    drawTrie(trie, nodePath)
+    drawTrie(trie, nodePath);
+
+    add_input.value = '';
 });
 
 search_input.addEventListener('input', (e) => {
-    const prev_val = e.target.value; 
     e.target.value = e.target.value.replace(/[^a-zA-Z]/g, '').toUpperCase();
     
-    if (prev_val == e.target.value || !e.target.value) return;
+    if (!e.target.value) return;
 
     const path = trie.search(e.target.value);
     if (path) {
-        animateSearch(path);
+        animateSearch(path, trie.root);
     } else {
         alert("word not found.");
     }

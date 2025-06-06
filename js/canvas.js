@@ -8,13 +8,22 @@ function clearCanvas() {
 }
 
 // draws node
-function drawNode(x, y, char, isHighlighted = false) {
+function drawNode(x, y, char, isHighlighted = false, isEndOfWord = false) {
   ctx.beginPath();
   ctx.arc(x, y, NODE_RADIUS, 0, 2 * Math.PI);
   ctx.fillStyle = isHighlighted ? '#23bbef' : '#e0f7fa'; // highlight = yellow
   ctx.fill();
   ctx.strokeStyle = isHighlighted ? '#259bc3' : '#000';  // highlight border = gold
   ctx.stroke();
+
+  if (isEndOfWord) {
+    ctx.fillStyle = '#4caf50';
+    ctx.beginPath();
+    ctx.arc(x + 8, y - 8, 3, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.strokeStyle = '#000';
+    ctx.stroke();
+  }
 
   ctx.fillStyle = '#000';
   ctx.textAlign = 'center';
@@ -63,7 +72,7 @@ function drawTrie(trie, highlightPath = []) {
       dfs(child);
     }
 
-    drawNode(node.x, node.y, node.char, highlightSet.has(node));
+    drawNode(node.x, node.y, node.char, highlightSet.has(node), node.isEndOfWord);
   }
 
   dfs(trie.root);

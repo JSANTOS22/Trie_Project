@@ -24,6 +24,7 @@ class Trie {
 
     constructor(){
         this.root = new TrieNode('');
+        this.words = [];
     }
 
     insert(word){
@@ -43,7 +44,11 @@ class Trie {
             nodePath.push(node);
         }
 
-        node.isEndOfWord = true;
+        if (!node.isEndOfWord){
+            node.isEndOfWord = true;
+            this.words.push(word);
+        }
+        
 
         return nodePath;
 
@@ -52,7 +57,7 @@ class Trie {
     search(word){
 
         let node = this.root;
-        const path = [];
+        const path = new Set();
 
         for (const char of word){
 
@@ -62,13 +67,17 @@ class Trie {
             }
 
             node = node.children[char];
-            path.push(node);
+            path.add(node);
 
         }
 
         //return node.isEndOfWord;
         return path;
 
+    }
+
+    getAllWords() {
+        return this.words;
     }
 
 }
