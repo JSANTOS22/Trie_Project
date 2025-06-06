@@ -5,6 +5,7 @@ const search_input = document.getElementById('search-input-field');
 const wrapper = canvas.parentElement; 
 const trie = new Trie();
 var nodePath = [];
+var searchPath = new Set();
 
 add_button.addEventListener('click', (e) => {
     add_input.value = add_input.value.replace(/[^a-zA-Z]/g, '').toUpperCase();
@@ -27,9 +28,9 @@ search_input.addEventListener('input', (e) => {
         return;
     }
 
-    const path = trie.search(e.target.value);
-    if (path) {
-        animateSearch(path, trie.root);
+    searchPath = trie.search(e.target.value);
+    if (searchPath) {
+        animateSearch(searchPath, trie.root);
     } else {
         alert("word not found.");
     }
@@ -74,6 +75,7 @@ function resizeCanvas() {
 
     assignPositions(trie.root, canvas.clientWidth);
     drawTrie(trie, nodePath);
+    animateSearch(searchPath, trie.root);
 }
 
 window.addEventListener('resize', resizeCanvas);
