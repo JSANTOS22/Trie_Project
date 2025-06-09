@@ -5,7 +5,7 @@
     --card-bg-color: #f5f5f9;
     --shadow: 2px 2px 30px rgba(36, 21, 21, 0.1);
     --hover-color: #adadad;
-    --navbar-bg-color: #f8f9fa;
+    --navbar-bg-color: #dcdddd;
 }
 
 [light-mode="dark"] {
@@ -174,8 +174,21 @@ body {
     margin-top: 10px;
     margin-bottom: 2px;
     height: 25%;
-    /* border: 2px solid var(--text-color); */
-    border-radius: 1rem; 
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: flex;
+    gap: 1rem; /* for spacing between items */
+    white-space: nowrap;
+    scrollbar-width: thin;
+    scrollbar-color: #888 transparent;
+}
+
+.word {
+    height: fit-content;
+    border-radius: 1rem;
+    background-color: var(--navbar-bg-color);
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 .search-field, .add-field {

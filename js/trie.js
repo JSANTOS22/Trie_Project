@@ -58,6 +58,7 @@ class Trie {
 
         let node = this.root;
         const path = new Set();
+        const remaining_words = [];
 
         for (const char of word){
 
@@ -71,9 +72,18 @@ class Trie {
 
         }
 
-        //return node.isEndOfWord;
-        return path;
+        this.get_remaining_words(remaining_words, word, node);
 
+        return { path, remaining_words };
+
+    }
+
+    get_remaining_words(remaining_words, word, node){
+        if (node.isEndOfWord) remaining_words.push(word);
+
+        for (const child of Object.values(node.children)){
+            this.get_remaining_words(remaining_words, word + child.char, child);
+        }
     }
 
     getAllWords() {

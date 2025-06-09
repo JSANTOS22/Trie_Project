@@ -17,6 +17,8 @@ add_button.addEventListener('click', (e) => {
     drawTrie(trie, nodePath);
 
     add_input.value = '';
+
+    updateWordBank(trie.getAllWords());
 });
 
 search_input.addEventListener('input', (e) => {
@@ -25,16 +27,35 @@ search_input.addEventListener('input', (e) => {
     
     if (!e.target.value) {
         animateSearch(new Set(), trie.root);
+        updateWordBank(trie.getAllWords());
         return;
     }
 
-    searchPath = trie.search(e.target.value);
-    if (searchPath) {
-        animateSearch(searchPath, trie.root);
+    const res = trie.search(e.target.value);
+
+    if (res) {
+        const { path, remaining_words} = trie.search(e.target.value);
+        animateSearch(path, trie.root);
+        updateWordBank(remaining_words);
     } else {
-        alert("word not found.");
+        updateWordBank([]);
     }
+    
 })
+
+function updateWordBank(words){
+    const bank = document.getElementById('bank');
+    bank.innerHTML = "";
+
+    if (!words) return;
+
+    words.forEach(word => {
+        const div = document.createElement('div');
+        div.classList.add('word');
+        div.innerText = word;
+        bank.appendChild(div);
+    }); 
+}
 
 // adds word to Trie
 function add_to_Trie(){
