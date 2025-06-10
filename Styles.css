@@ -212,3 +212,10 @@ body {
     width: 50%;
 }
 
+.fail-search {
+    box-shadow: 0 0 15px 5px rgba(247, 18, 18, 0.7);
+}
+
+.success-search{
+    box-shadow: 0 0 15px 5px rgba(30, 248, 11, 0.7);
+}

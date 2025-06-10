@@ -2,6 +2,7 @@
 const add_input = document.getElementById('add-input-field');
 const add_button = document.getElementById('add-button');
 const search_input = document.getElementById('search-input-field');
+const title = document.getElementById('title');
 const wrapper = canvas.parentElement; 
 const trie = new Trie();
 var nodePath = [];
@@ -37,8 +38,14 @@ search_input.addEventListener('input', (e) => {
         const { path, remaining_words} = trie.search(e.target.value);
         animateSearch(path, trie.root);
         updateWordBank(remaining_words);
+        if (remaining_words[0] == e.target.value){
+            updateBorderColors(1);
+        } else {
+            updateBorderColors(2);
+        }
     } else {
-        updateWordBank([]);
+        updateWordBank(['No search results...']);
+        updateBorderColors(0);
     }
     
 })
@@ -68,11 +75,14 @@ function switch_action(type){
     if (type === "add") {
         $('.search-field').addClass('hidden');
         $('.add-field').removeClass('hidden');
+        title.innerHTML = 'Add a word to the Trie';
         drawTrie(trie, nodePath);
         search_input.value = '';
+        updateBorderColors(2);
     } else {
         $('.add-field').addClass('hidden');
         $('.search-field').removeClass('hidden');
+        title.innerHTML = 'Search for a word in the Trie';
         drawTrie(trie, nodePath);
         add_input.value = '';
     }
@@ -100,3 +110,19 @@ function resizeCanvas() {
 }
 
 window.addEventListener('resize', resizeCanvas);
+
+// updating border colors by adding/removing a class
+function updateBorderColors(action){
+    $('.canvas-wrapper').removeClass('fail-search');
+    $('.canvas-wrapper').removeClass('success-search');
+    $('.search-field').removeClass('fail-search');
+    $('.search-field').removeClass('success-search');
+
+    if (action == 0){
+        $('.canvas-wrapper').addClass('fail-search');
+        $('.search-field').addClass('fail-search');
+    } else if (action == 1){
+        $('.canvas-wrapper').addClass('success-search');
+        $('.search-field').addClass('success-search');
+    }
+}
