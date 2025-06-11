@@ -79,6 +79,7 @@ function switch_action(type){
         drawTrie(trie, nodePath);
         search_input.value = '';
         updateBorderColors(2);
+        updateWordBank(trie.getAllWords());
     } else {
         $('.add-field').addClass('hidden');
         $('.search-field').removeClass('hidden');
