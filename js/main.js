@@ -29,6 +29,7 @@ search_input.addEventListener('input', (e) => {
     if (!e.target.value) {
         animateSearch(new Set(), trie.root);
         updateWordBank(trie.getAllWords());
+        updateBorderColors(2);
         return;
     }
 
