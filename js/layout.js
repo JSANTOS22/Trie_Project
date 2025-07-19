@@ -20,6 +20,7 @@ function assignPositions(root, canvasWidth, startY = 80, spacing = 80) {
     if (children.length === 0) {
       node.x = x;
       node.y = startY + depth * spacing;
+      node.y = node.y / 2;
       x += spacing;
       return node.x;
     }
@@ -35,6 +36,7 @@ function assignPositions(root, canvasWidth, startY = 80, spacing = 80) {
     // center parent based off of median of x coordinates of it's children
     node.x = (minX + maxX) / 2;
     node.y = startY + depth * spacing;
+    node.y = node.y / 2;
     return node.x;
   }
 
