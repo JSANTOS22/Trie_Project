@@ -117,14 +117,14 @@ window.addEventListener('resize', resizeCanvas);
 function updateBorderColors(action){
     $('.canvas-wrapper').removeClass('fail-search');
     $('.canvas-wrapper').removeClass('success-search');
-    $('.search-field').removeClass('fail-search');
-    $('.search-field').removeClass('success-search');
+    $('.search').removeClass('fail-search');
+    $('.search').removeClass('success-search');
 
     if (action == 0){
         $('.canvas-wrapper').addClass('fail-search');
-        $('.search-field').addClass('fail-search');
+        $('.search').addClass('fail-search');
     } else if (action == 1){
         $('.canvas-wrapper').addClass('success-search');
-        $('.search-field').addClass('success-search');
+        $('.search').addClass('success-search');
     }
 }

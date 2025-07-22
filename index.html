@@ -68,19 +68,21 @@
         <div id="bank" class="word-bank"></div>
         <div class="add-field">
           <form onsubmit="if(!this.checkValidity()){add_to_Trie();} return false;">
-            <div class="form-row">
-              <div class="col-10">
-                <input id="add-input-field" class="form-control" pattern="\S+" maxlength="10" rows="4" placeholder="Add a single word to Trie..." required />
-              </div>
-              <div class="col-2">
-                <button id="add-button" type="submit" class="btn btn-primary">Add</button>
-              </div>
-              
+            <div class="add">
+              <input id="add-input-field" class="add-txt" type="text" pattern="\S+" maxlength="10" required placeholder="Type to add">
+              <button id="add-button" type="submit" class="button">
+                <i class="fa-solid fa-plus"></i>
+              </button>
             </div>
           </form>
         </div>
         <div class="search-field hidden">
-          <input id="search-input-field" class="form-control" pattern="\S+" maxlength="10" rows="4" placeholder="Search for a single word..." />
+          <div class="search">
+            <input id="search-input-field" class="search-txt" type="text" pattern="\S+" maxlength="10" required placeholder="Type to search">
+            <button class="button">
+              <i class="fas fa-search"></i>
+            </button>
+          </div> 
         </div>
       </div>
 
