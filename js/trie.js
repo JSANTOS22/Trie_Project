@@ -54,6 +54,51 @@ class Trie {
 
     }
 
+    delete(word){
+
+        let node = this.root;
+        const nodePath = [node];
+
+        for (const char of word){
+
+            // if child car doesn't exist, word isn't in the Trie
+            if (!node.children[char]){
+                return false;
+            }
+
+            node = node.children[char];
+            nodePath.push(node);
+
+        }
+
+        // check if node is an end of word
+        if (!node.isEndOfWord){
+            return false;
+        }
+
+        // start the deletion process
+        node.isEndOfWord = false;
+
+        // remove the word from the list used by the word bank.
+        this.words = this.words.filter(existingWord => existingWord !== word);
+
+        // remove nodes that are no longer needed, starting at the end of the word.
+        for (let i = nodePath.length - 1; i > 0; i--){
+            const currentNode = nodePath[i];
+            const parentNode = nodePath[i - 1];
+
+            // keep nodes that support another word or have other descendants.
+            if (currentNode.isEndOfWord || Object.keys(currentNode.children).length > 0) {
+                break;
+            }
+
+            delete parentNode.children[currentNode.char];
+        }
+
+        return true;
+
+    }
+
     search(word){
 
         let node = this.root;
