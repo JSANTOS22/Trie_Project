@@ -136,3 +136,8 @@ class Trie {
     }
 
 }
+
+// Allow the trie to be tested with Node without changing browser behavior.
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { Trie, TrieNode };
+}
