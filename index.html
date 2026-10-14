@@ -35,6 +35,7 @@
           <div class="dropdown-menu" aria-labelledby="dropdownId">
             <a class="dropdown-item" onclick="switch_action('add')">Add word to Trie</a>
             <a class="dropdown-item" onclick="switch_action('remove')">Search for word</a>
+            <a class="dropdown-item" onclick="switch_action('delete')">Delete word from Trie</a>
           </div>
         </li>
       </ul>
@@ -73,6 +74,16 @@
               <input id="add-input-field" class="add-txt" type="text" pattern="\S+" maxlength="10" required placeholder="Type to add">
               <button id="add-button" type="submit" class="button">
                 <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="delete-field hidden">
+          <form id="delete-form">
+            <div class="delete">
+              <input id="delete-input-field" class="delete-txt" type="text" maxlength="10" required placeholder="Type to delete">
+              <button id="delete-button" type="submit" class="button">
+                <i class="fa-solid fa-trash"></i>
               </button>
             </div>
           </form>
