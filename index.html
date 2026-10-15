@@ -69,7 +69,7 @@
       <div class="user-input-wrapper">
         <div id="bank" class="word-bank"></div>
         <div class="add-field">
-          <form onsubmit="if(!this.checkValidity()){add_to_Trie();} return false;">
+          <form id="add-form">
             <div class="add">
               <input id="add-input-field" class="add-txt" type="text" pattern="\S+" maxlength="10" required placeholder="Type to add">
               <button id="add-button" type="submit" class="button">

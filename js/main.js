@@ -1,6 +1,9 @@
 // event listener for the search and add input field
 const add_input = document.getElementById('add-input-field');
 const add_button = document.getElementById('add-button');
+const add_form = document.getElementById('add-form');
+const delete_input = document.getElementById('delete-input-field');
+const delete_form = document.getElementById('delete-form');
 const search_input = document.getElementById('search-input-field');
 const title = document.getElementById('title');
 const wrapper = canvas.parentElement; 
@@ -8,18 +11,20 @@ const trie = new Trie();
 var nodePath = [];
 var searchPath = new Set();
 
-add_button.addEventListener('click', (e) => {
-    add_input.value = add_input.value.replace(/[^a-zA-Z]/g, '').toUpperCase();
+add_form.addEventListener('submit', (e) => {
 
-    if (!add_input.value) return;
+    e.preventDefault();
 
-    nodePath = trie.insert(add_input.value);
+    const word = add_input.value.replace(/[^a-zA-Z]/g, '').toUpperCase();
+
+    if (!word) return;
+
+    nodePath = trie.insert(word);
     assignPositions(trie.root, canvas.clientWidth);
     drawTrie(trie, nodePath);
+    updateWordBank(trie.getAllWords());
 
     add_input.value = '';
-
-    updateWordBank(trie.getAllWords());
 });
 
 search_input.addEventListener('input', (e) => {
