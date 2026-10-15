@@ -27,6 +27,30 @@ add_form.addEventListener('submit', (e) => {
     add_input.value = '';
 });
 
+delete_form.addEventListener('submit', (e) => {
+
+    e.preventDefault();
+
+    const word = delete_input.value.replace(/[^a-zA-Z]/g, '').toUpperCase();
+
+    if (!word) return;
+
+    const deleted = trie.delete(word);
+
+    if (!deleted) {
+        updateBorderColors(0);
+        return;
+    }
+
+    nodePath = [];
+    assignPositions(trie.root, canvas.clientWidth);
+    drawTrie(trie, nodePath);
+    updateWordBank(trie.getAllWords());
+    updateBorderColors(1);
+
+    delete_input.value = '';
+});
+
 search_input.addEventListener('input', (e) => {
     e.target.value = e.target.value.replace(/[^a-zA-Z]/g, '').toUpperCase();
     drawTrie(trie, []);
