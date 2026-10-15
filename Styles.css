@@ -191,7 +191,7 @@ body {
     padding-right: 8px;
 }
 
-.search-field, .add-field {
+.search-field, .add-field, .delete-field {
     margin-left: 25%;
     margin-right: 25%;
     margin-top: 2px;
@@ -216,7 +216,7 @@ body {
     box-shadow: 0 0 15px 5px rgba(30, 248, 11, 0.7);
 }
 
-.search, .add {
+.search, .add, .delete {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -231,13 +231,14 @@ body {
 }
 
 .search:hover .search-txt,
-.add:hover .add-txt {
+.add:hover .add-txt,
+.delete:hover .delete-txt {
     width: 180px;
     padding: 0 10px;
     opacity: 1;
 }
 
-.search-txt, .add-txt{
+.search-txt, .add-txt, .delete-txt {
     border: none;
     background: none;
     outline: none;
@@ -256,7 +257,8 @@ body {
 }
 
 .search:hover > .button,
-.add:hover > .button {
+.add:hover > .button,
+.delete:hover > .button {
    background: white ;
 }
 

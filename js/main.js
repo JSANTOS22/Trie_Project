@@ -104,18 +104,36 @@ function switch_action(type){
     nodePath = [];
     if (type === "add") {
         $('.search-field').addClass('hidden');
+        $('.delete-field').addClass('hidden');
+    
         $('.add-field').removeClass('hidden');
+
         title.innerHTML = 'Add a word to the Trie';
         drawTrie(trie, nodePath);
         search_input.value = '';
+        delete_input.value = '';
         updateBorderColors(2);
         updateWordBank(trie.getAllWords());
-    } else {
+    } else if (type === "search") {
         $('.add-field').addClass('hidden');
+        $('.delete-field').addClass('hidden');
+
         $('.search-field').removeClass('hidden');
+
         title.innerHTML = 'Search for a word in the Trie';
         drawTrie(trie, nodePath);
         add_input.value = '';
+        delete_input.value = '';
+    } else {
+        $('.add-field').addClass('hidden');
+        $('.search-field').addClass('hidden');
+
+        $('.delete-field').removeClass('hidden');
+
+        title.innerHTML = 'Delete a word from the Trie';
+        drawTrie(trie, nodePath);
+        add_input.value = '';
+        search_input.value = '';
     }
 }
 
