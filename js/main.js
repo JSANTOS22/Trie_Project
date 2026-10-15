@@ -1,6 +1,5 @@
 // event listener for the search and add input field
 const add_input = document.getElementById('add-input-field');
-const add_button = document.getElementById('add-button');
 const add_form = document.getElementById('add-form');
 const delete_input = document.getElementById('delete-input-field');
 const delete_form = document.getElementById('delete-form');
@@ -94,11 +93,6 @@ function updateWordBank(words){
     }); 
 }
 
-// adds word to Trie
-function add_to_Trie(){
-    add_input.value = '';
-}
-
 // function that switches the action
 function switch_action(type){
     nodePath = [];
@@ -124,7 +118,7 @@ function switch_action(type){
         drawTrie(trie, nodePath);
         add_input.value = '';
         delete_input.value = '';
-    } else {
+    } else if (type === "delete") {
         $('.add-field').addClass('hidden');
         $('.search-field').addClass('hidden');
 
